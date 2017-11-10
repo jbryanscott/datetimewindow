@@ -2,7 +2,7 @@
 Easily create and manipulate windows of `datetime` types.
 
 # Examples
-```
+```python
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from datetimewindow import DatetimeWindow

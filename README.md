@@ -59,7 +59,7 @@ print(dtw)
 for i in range(12):
     dtw = dtw.window_add(**step)
     # with Session as s:
-    #     r = s.get(url, dict(updated_at_min=dtw.start, updated_at_max=dtw.end))
+    #     r = s.get(url, params=dict(updated_at_min=dtw.start, updated_at_max=dtw.end))
     #     ...
     print(dtw)
 ```

@@ -12,8 +12,13 @@ class DatetimeWindow:
     '''
     default_timezone = pytz.UTC
 
-    def __init__(self, date1: datetime, date2: datetime=None):
+    def __init__(
+        self, date1: Union[datetime, relativedelta], date2: datetime=None
+    ) -> None:
         date2 = self.now_if_none(date2)
+
+        if isinstance(date1, relativedelta):
+            date1 = date2 + date1
 
         date1 = self.ensure_timezone(date1)
         date2 = self.ensure_timezone(date2)
@@ -23,14 +28,14 @@ class DatetimeWindow:
 
         self.duration = relativedelta(self.end, self.start)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return '{}({}, {})'.format(
             self.__class__.__name__,
             repr(self.start),
             repr(self.end)
         )
 
-    def __str__(self):
+    def __str__(self) -> str:
         return str({
             'start':        self.start,
             'end':          self.end,
@@ -38,7 +43,8 @@ class DatetimeWindow:
         })
 
     @staticmethod
-    def now_if_none(dt: Union[None, datetime]) -> datetime:
+    def now_if_none(dt: Union[None, datetime]
+                    ) -> Union[datetime, relativedelta]:
         if dt is None:
             return datetime.now(DatetimeWindow.default_timezone)
         else:

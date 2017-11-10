@@ -105,6 +105,18 @@ class DatetimeWindow:
             end=self.end + relativedelta(**relativedelta_kwargs),
         )
 
+    def window_expand(self, **relativedelta_kwargs) -> 'DatetimeWindow':
+        '''
+        Symmetrically expand the DatetimeWindow by relativedelta at both the
+        start and the end.
+        Uses the relativedelta args, e.g.       dtw.window_expand(days=1)
+        Can be negative, e.g.                   dtw.window_expand(days=-1)
+        '''
+        return self.create_explicit(
+            start=self.start - relativedelta(**relativedelta_kwargs),
+            end=self.end + relativedelta(**relativedelta_kwargs),
+        )
+
     def duration_days(self) -> float:
         '''
         Calculates the duration of the DatetimeWindow using only `days` as the

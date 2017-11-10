@@ -2,8 +2,8 @@ from distutils.core import setup
 
 
 setup(
-    name='datetime_window',
-    packages=['datetime_window'],
+    name='datetimewindow',
+    packages=['datetimewindow'],
     version='0.1',
     description='Data type for windows of datetimes.',
     author='JBS',

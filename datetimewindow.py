@@ -155,7 +155,7 @@ class DatetimeWindow:
         '''
         if isinstance(dt, datetime):
             dtw = DatetimeWindow(dt, dt)
-        elif isinstance(dtw, DatetimeWindow):
+        elif isinstance(dt, DatetimeWindow):
             dtw = dt
         else:
             raise TypeError('Must compare a datetime or DatetimeWindow')

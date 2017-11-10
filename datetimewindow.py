@@ -144,9 +144,11 @@ class DatetimeWindow:
         '''
         Does the DatetimeWindow start after the specified datetime?
         '''
+        if not isinstance(dt, datetime):
+            raise ValueError('Must compare a datetime to the DatetimeWindow')
         return dt < self.start
 
-    def contains(self, dt: datetime) -> bool:
+    def contains(self, dt: Union[datetime, 'DatetimeWindow']) -> bool:
         '''
         Does the DatetimeWindow contain the
         specified datetime or DatetimeWindow?
@@ -156,22 +158,24 @@ class DatetimeWindow:
         elif isinstance(dtw, DatetimeWindow):
             dtw = dt
         else:
-            TypeError('Must compare a datetime or DatetimeWindow')
+            raise TypeError('Must compare a datetime or DatetimeWindow')
         return dtw.start >= self.start and dtw.end <= self.end
 
-    def ends_before(self, dt: datetime) -> bool:
+    def ends_after(self, dt: datetime) -> bool:
         '''
-        Does the DatetimeWindow end before the specified datetime?
+        Does the DatetimeWindow end after the specified datetime?
         '''
-        return dt > self.end
+        if not isinstance(dt, datetime):
+            raise ValueError('Must compare a datetime to the DatetimeWindow')
+        return dt < self.end
 
-    def overlaps(self, dtw) -> Union['DatetimeWindow', None]:
+    def overlaps(self, dtw: 'DatetimeWindow') -> Union['DatetimeWindow', None]:
         '''
         Provide a new DatetimeWindow of the overlap, or None if the
         DatetimeWindows don't overlap.
         '''
         if not isinstance(dtw, DatetimeWindow):
-            TypeError('Must compare a DatetimeWindow')
+            raise TypeError('Must compare a DatetimeWindow')
 
         w_overall = DatetimeWindow(
             min([dtw.start, self.start]), max([dtw.end, self.end]))

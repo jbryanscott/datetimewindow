@@ -1,6 +1,9 @@
 # datetimewindow
 Easily create and manipulate windows of `datetime` types.
 
+# Installing
+`pip3 install datetimewindow`
+
 # Examples
 ```python
 from datetime import datetime

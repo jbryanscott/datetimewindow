@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 
 
 setup(
@@ -12,5 +12,6 @@ setup(
     download_url=('https://github.com/'
                   'jbryanscott/datetimewindow/archive/0.1.tar.gz'),
     keywords=['datetime', 'window', 'interval', 'range'],
+    install_requires=['dateutil>=2.6.1'],
     classifiers=[],
 )
